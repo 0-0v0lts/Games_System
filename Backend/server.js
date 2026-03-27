@@ -20,11 +20,11 @@ app.get('/games', (req, res) => {
 });
 
 app.post('/games', (req, res) => {
-    const { titulo, genero, plataforma, ano_lanc, preco } = req.body;
+    const { titulo, genero, plataforma, ano_lanc, preco, trofeus } = req.body;
 
-    const sql = "INSERT INTO games (titulo, genero, plataforma, ano_lanc, preco) VALUES (?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO games (titulo, genero, plataforma, ano_lanc, preco, trofeus) VALUES (?, ?, ?, ?, ?, ?)";
 
-    db.query(sql, [titulo, genero, plataforma, ano_lanc, preco], (err, result) => {
+    db.query(sql, [titulo, genero, plataforma, ano_lanc, preco, trofeus], (err, result) => {
         if (err) {
             console.error("não inseriu o jogo:", err);
             return res.status(500).json({ error: "não cadastrou"});
@@ -48,11 +48,11 @@ app.delete('/games/:id', (req, res) => {
 
 app.put('/games/:id', (req, res) => {
     const { id } = req.params;
-    const { titulo, genero, plataforma, ano_lanc, preco } = req.body;
+    const { titulo, genero, plataforma, ano_lanc, preco, trofeus } = req.body;
 
-    const sql = "UPDATE games SET titulo = ?, genero = ?, plataforma = ?, ano_lanc = ?, preco = ? WHERE id = ?";
+    const sql = "UPDATE games SET titulo = ?, genero = ?, plataforma = ?, ano_lanc = ?, preco = ?, trofeus = ? WHERE id = ?";
 
-    db.query(sql, [titulo, genero, plataforma, ano_lanc, preco, id], (err, result) => {
+    db.query(sql, [titulo, genero, plataforma, ano_lanc, preco, trofeus, id], (err, result) => {
         if (err) {
             console.error("não atualizou:", err);
             return res.status(500).json({ error: "não editou o jogo" });
