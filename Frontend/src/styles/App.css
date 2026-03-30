@@ -90,7 +90,7 @@ body {
   width: 100%; 
   padding: 8px 0;
   border-radius: 6px; 
-  margin-top: 15px; 
+  margin-top: 6px; 
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: bold;
@@ -151,4 +151,122 @@ body {
 
 .trophy-badge {
   background: rgba(0, 0, 0, 0.6);
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  margin-top: 3px;
+}
+
+.button-edit {
+  background: rgba(255, 255, 255, 0.03); 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  color: rgba(255, 255, 255, 0.4);
+  width: 100%; 
+  padding: 8px 0;
+  border-radius: 6px; 
+  margin-top: 3px; 
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px); 
+}
+
+.button-edit:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+  width: 450px;
+  border: 1px solid #333;
+  color: white;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-save { 
+ background: rgba(255, 255, 255, 0.03); 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  color: rgba(255, 255, 255, 0.4);
+  width: 100%; 
+  padding: 12px 0;
+  border-radius: 6px; 
+  margin-top: 3px; 
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px); 
+}
+
+.btn-save:hover{
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-cancel { 
+  background: rgba(255, 255, 255, 0.03); 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  color: rgba(255, 255, 255, 0.4);
+  width: 100%; 
+  padding: 12px 0;
+  border-radius: 6px; 
+  margin-top: 3px; 
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px); 
+}
+
+.btn-cancel:hover{
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
