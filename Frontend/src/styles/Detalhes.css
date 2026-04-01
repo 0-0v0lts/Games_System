@@ -1,0 +1,114 @@
+.details-page {
+  background-color: #151515;
+  min-height: 100vh;
+  color: white;
+  position: relative;
+}
+
+.hero-banner {
+  position: absolute;
+  top: 0; left: 0;
+  width: 110%;
+  height: 800px;
+  background-size: cover;
+  background-position: center 20%;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to bottom, rgba(21, 21, 21, 0) 0%, rgba(21, 21, 21, 0.8) 70%, #151515 100%),
+    linear-gradient(to right, #151515 0%, rgba(21, 21, 21, 0) 40%, #151515 100%);
+}
+
+.details-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.back-link {
+  background: none; border: none; color: #888;
+  cursor: pointer; font-weight: bold; font-size: 12px;
+  letter-spacing: 2px; margin-bottom: 40px;
+}
+
+.back-link:hover { color: white; }
+
+.details-header h1 {
+  font-size: 80px;
+  margin: 10px 0;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.year-tag {
+  background: white; color: black;
+  padding: 2px 8px; border-radius: 4px;
+  font-weight: bold; margin-right: 15px;
+}
+
+.platform-tag {
+  background: white; color: black;
+  padding: 2px 8px; border-radius: 4px;
+  font-weight: bold; margin-right: 15px;
+}
+
+
+.details-main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  margin-top: 50px;
+}
+
+.about-section h2 {
+  color: #555;
+  text-transform: uppercase;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  line-height: 1.8;
+  color: #ccc;
+  font-size: 18px;
+  text-align: justify;
+}
+
+.stats-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.game-logo-image {
+  max-width: 450px;
+  max-height: 180px;
+  display: block;
+  margin-top: 15px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
+}
+
+.stat-card .label { color: #666; font-size: 12px; text-transform: uppercase; display: block; }
+.stat-card .value { font-size: 20px; font-weight: bold; color: white; margin-top: 5px; display: block; }
+
+@media (max-width: 480px) {
+  .input-row, .input-row-three {
+    grid-template-columns: 1fr;
+  }
+}

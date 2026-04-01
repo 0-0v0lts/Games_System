@@ -8,7 +8,7 @@ const Gameimagem = ({ title }) => {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const res = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${title}`)
+        const res = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${title}`, { timeout: 6000 })
         if (res.data.results && res.data.results.length > 0) {
           setImgUrl(res.data.results[0].background_image)
         }

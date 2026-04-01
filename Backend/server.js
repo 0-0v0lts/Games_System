@@ -19,6 +19,22 @@ app.get('/games', (req, res) => {
     });
 });
 
+app.get('/games/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = "SELECT * FROM games WHERE id = ?";
+
+    db.query(sql, [id], (err, results) => {
+        if (err) {
+            console.error("Erro ao buscar:", err);
+            return res.status(500).json({ error: "Erro no banco de dados" });
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ error: "Jogo não encontrado" });
+        }
+        res.json(results[0]);
+    });
+});
+
 app.post('/games', (req, res) => {
     const { titulo, genero, plataforma, ano_lanc, preco, trofeus } = req.body;
 

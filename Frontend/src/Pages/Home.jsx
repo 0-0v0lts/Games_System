@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import axios from 'axios'
 import Gameimagem from '../components/GameImagem'
+import { useNavigate } from 'react-router-dom'
 
 const Home = ({ games, fetchGames }) => {
   const [estaEditando, setEstaEditando] = useState(false)
   const [jogoEscolhido, setJogoEscolhido] = useState(null)
 
-  const openEditModal = (game) => {
+  const navigate = useNavigate()
+
+  const openEditModal = (e, game) => {
+    e.stopPropagation()
     setJogoEscolhido(game)
     setEstaEditando(true)
   }
@@ -23,8 +27,9 @@ const Home = ({ games, fetchGames }) => {
     }
   }
 
-  const deleteGame = async (id) => {
-    if (window.confirm("Remover Platina?")) {
+  const deleteGame = async (e, id) => {
+    e.stopPropagation()
+    if (window.confirm("Remover?")) {
       try {
         await axios.delete(`http://localhost:3001/games/${id}`)
         fetchGames()
@@ -38,7 +43,7 @@ const Home = ({ games, fetchGames }) => {
       <div className = 'game-grid'>
         {games.length > 0 ? (
           games.map((game) => (
-            <div key={game.id} className="game-card">
+            <div key={game.id} className="game-card" onClick = {() => navigate(`/detalhes/${game.id}`)}>
               <Gameimagem title = {game.titulo} />
               <div className='info-game'>
                 <div className = 'top-badges'>
@@ -60,8 +65,8 @@ const Home = ({ games, fetchGames }) => {
                     <span className='badge price-tag'>R$ {game.preco}</span>
                   </div>
                   <div className = 'action-buttons'>
-                    <button onClick={() => openEditModal(game)} className = 'button-edit'>Editar</button>
-                    <button onClick={() => deleteGame(game.id)} className = "button-delete">Remover</button>
+                    <button onClick={(e) => openEditModal(e, game)} className = 'button-edit'>Editar</button>
+                    <button onClick={(e) => deleteGame(e, game.id)} className = "button-delete">Remover</button>
                   </div>
                 </div>
               </div>

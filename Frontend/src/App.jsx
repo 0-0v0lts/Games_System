@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Home from './Pages/Home'
 import Cadastro from './Pages/Cadastro'
+import Detalhes from './Pages/Detalhes'
 import './styles/App.css'
 
 function App() {
@@ -28,17 +29,11 @@ function App() {
       <Header />
       <div className="container">
         <Routes>
-          <Route 
-            path="/" 
-            element={<Home games={games} fetchGames={fetchGames} />} 
-          />
+          <Route path="/" element={<Home games={games} fetchGames={fetchGames} />}/>
 
-          <Route 
-            path="/cadastrar" 
-            element={<Cadastro fetchGames={fetchGames} />} 
-          />
-          
-          <Route path="/jogo/:id" element={<div style={{color: 'white'}}>Página de Detalhes em breve...</div>} />
+          <Route path="/cadastrar" element={<Cadastro fetchGames={fetchGames} />}/>
+
+          <Route path="/detalhes/:id" element={<Detalhes />}/>
         </Routes>
       </div>
     </BrowserRouter>
