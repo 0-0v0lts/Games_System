@@ -3,7 +3,7 @@ import axios from 'axios'
 import Gameimagem from '../components/GameImagem'
 import { useNavigate } from 'react-router-dom'
 
-const Home = ({ games, fetchGames }) => {
+const Home = ({ games, fetchGames, currentPage, setCurrentPage, totalPages }) => {
   const [estaEditando, setEstaEditando] = useState(false)
   const [jogoEscolhido, setJogoEscolhido] = useState(null)
 
@@ -76,6 +76,28 @@ const Home = ({ games, fetchGames }) => {
           <p>Carregando os jogos ou nenhum foi encontrado...</p>
         )}
       </div>
+
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button 
+            className="btn-pag"
+            disabled={currentPage === 1} 
+            onClick={() => setCurrentPage(prev => prev - 1)}
+          >
+            « Anterior
+          </button>
+          
+          <span className="pag-info">Página <strong>{currentPage}</strong> de {totalPages}</span>
+          
+          <button 
+            className="btn-pag"
+            disabled={currentPage === totalPages} 
+            onClick={() => setCurrentPage(prev => prev + 1)}
+          >
+            Próximo »
+          </button>
+        </div>
+      )}  
 
       {estaEditando && (
         <div className="modal-overlay">

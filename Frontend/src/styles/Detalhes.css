@@ -40,7 +40,7 @@
 .back-link:hover { color: white; }
 
 .details-header h1 {
-  font-size: 80px;
+  font-size: 70px;
   margin: 10px 0;
   line-height: 1;
   text-transform: uppercase;
@@ -57,6 +57,7 @@
   background: white; color: black;
   padding: 2px 8px; border-radius: 4px;
   font-weight: bold; margin-right: 15px;
+  text-transform: uppercase;
 }
 
 
@@ -92,7 +93,7 @@
   background: rgba(255, 255, 255, 0.03);
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .game-logo-image {
@@ -101,7 +102,7 @@
   display: block;
   margin-top: 15px;
   object-fit: contain;
-  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.8));
 }
 
 .stat-card .label { color: #666; font-size: 12px; text-transform: uppercase; display: block; }

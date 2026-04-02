@@ -8,14 +8,26 @@ app.use(cors())
 app.use(express.json());
 
 app.get('/games', (req, res) => {
-    const sql = "SELECT * FROM games";
+    const limit = 9; 
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    const sqlData = "SELECT * FROM games LIMIT ? OFFSET ?";
+    const sqlCount = "SELECT COUNT(*) as total FROM games";
 
-    db.query(sql, (err, results) => {
-        if (err) {
-            console.error("não achou os jogos:", err)
-            return res.status(500).json({ error: "não achou o banco de dados"});
-        }
-        res.json(results);
+    db.query(sqlCount, (err, countResult) => {
+        if (err) return res.status(500).json(err);
+
+        const totalItems = countResult[0].total;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        db.query(sqlData, [limit, offset], (err, results) => {
+            if (err) return res.status(500).json(err);
+            res.json({
+                games: results,
+                totalPages: totalPages,
+                currentPage: page
+            });
+        });
     });
 });
 
@@ -37,6 +49,10 @@ app.get('/games/:id', (req, res) => {
 
 app.post('/games', (req, res) => {
     const { titulo, genero, plataforma, ano_lanc, preco, trofeus } = req.body;
+
+    if (!titulo || !genero || !plataforma || !ano_lanc || preco === undefined || trofeus === undefined) {
+        return res.status(400).json({ error: "Preencha todos os Campos" });
+    }
 
     const sql = "INSERT INTO games (titulo, genero, plataforma, ano_lanc, preco, trofeus) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -65,6 +81,10 @@ app.delete('/games/:id', (req, res) => {
 app.put('/games/:id', (req, res) => {
     const { id } = req.params;
     const { titulo, genero, plataforma, ano_lanc, preco, trofeus } = req.body;
+
+    if (!titulo || !genero || !plataforma || !ano_lanc || preco === undefined || trofeus === undefined) {
+        return res.status(400).json({ error: "Preencha todos os Campos" });
+    }
 
     const sql = "UPDATE games SET titulo = ?, genero = ?, plataforma = ?, ano_lanc = ?, preco = ?, trofeus = ? WHERE id = ?";
 
