@@ -27,12 +27,14 @@ Importe este arquivo no seu MySQL Workbench antes de iniciar o servidor.
 cd Backend
 npm install
 npm start
+```
 
 ## **3. Frontend**
 ```bash
 cd Frontend
 npm install
 npm start
+```
 
 ## **Funcionalidades**
 
