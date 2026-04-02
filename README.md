@@ -17,18 +17,18 @@ O objetivo deste projeto é desenvolver uma aplicação web para o gerenciamento
 
 ## **Como executar o projeto**
 
-### **1. Banco de Dados**
+## **1. Banco de Dados**
 O script para criação das tabelas e inserção dos dados iniciais está localizado em:
 `./database/games_system_export.sql`
 Importe este arquivo no seu MySQL Workbench antes de iniciar o servidor.
 
-### **2. Backend**
+## **2. Backend**
 ```bash
 cd Backend
 npm install
 npm start
 
-### **3. Frontend**
+## **3. Frontend**
 ```bash
 cd Frontend
 npm install
