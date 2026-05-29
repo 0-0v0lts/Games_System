@@ -7,30 +7,30 @@
 }
 
 .cadastro-card {
-  background-color: #202020;
+  background-color: var(--card-bg-color);
   padding: 40px;
   border-radius: 12px;
   width: 100%;
   max-width: 600px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
 }
 
 .cadastro-card h2 {
-  color: white;
+  color: var(--text-primary);
   font-size: 28px;
   margin-bottom: 5px;
 }
 
 .cadastro-card h2 span {
-  color: #27ae60;
-  background-color: rgba(39, 174, 96, 0.1);
+  color: var(--accent-neon);
+  background-color: var(--accent-neon-dim);
   padding: 0 8px;
   border-radius: 4px;
 }
 
 .cadastro-card p {
-  color: #888;
+  color: var(--text-secondary);
   font-size: 14px;
   margin-bottom: 30px;
 }
@@ -42,7 +42,7 @@
 }
 
 .cadastro-form label {
-  color: #bbb;
+  color: var(--text-secondary);
   font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
@@ -50,26 +50,24 @@
 }
 
 .cadastro-form input {
-  background-color: #333;
-  border: 1px solid #444;
+  background-color: var(--input-bg-color);
+  border: 1px solid var(--border-color);
   padding: 12px 15px;
   border-radius: 8px;
-  color: white;
+  color: var(--text-primary);
   font-size: 16px;
   transition: all 0.3s ease;
 }
 
-.cadastro-form input:hover{
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+.cadastro-form input:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--text-secondary);
 }
 
-.cadastro-form:focus {
-  outline: none;
-  border-color: #27ae60;
-  background-color: #3d3d3d;
+.cadastro-form input:focus {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .input-row {
@@ -90,10 +88,10 @@
   margin-top: 10px;
 }
 
-.btn-save {
+.btn-save, .btn-back {
   background: rgba(255, 255, 255, 0.03); 
-  border: 1px solid rgba(255, 255, 255, 0.1); 
-  color: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-color); 
+  color: var(--text-secondary);
   width: 100%; 
   padding: 12px 0;
   border-radius: 6px; 
@@ -107,35 +105,10 @@
   backdrop-filter: blur(4px); 
 }
 
-.btn-save:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.btn-back {
-  background: rgba(255, 255, 255, 0.03); 
-  border: 1px solid rgba(255, 255, 255, 0.1); 
-  color: rgba(255, 255, 255, 0.4);
-  width: 100%; 
-  padding: 12px 0;
-  border-radius: 6px; 
-  margin-top: 3px; 
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-transform: uppercase; 
-  letter-spacing: 1px; 
-  transition: all 0.3s ease;
-  backdrop-filter: blur(4px); 
-}
-
-.btn-back:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+.btn-save:hover, .btn-back:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 @media (max-width: 480px) {

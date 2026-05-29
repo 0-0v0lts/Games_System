@@ -8,54 +8,91 @@ const Detalhes = () => {
   const navigate = useNavigate();
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState([]);
+  const [newReview, setNewReview] = useState('');
+  const [reviewError, setReviewError] = useState('');
 
-  const RAWG_KEY = 'a270cb5741884441adca87b8298d3c1b'; 
+  const username = localStorage.getItem('username');
 
-useEffect(() => {
-  const fetchAllData = async () => {
+  const fetchReviews = async () => {
     try {
-      setLoading(true);
-      
-      const resLocal = await axios.get(`http://localhost:3001/games/${id}`);
-      const localData = resLocal.data;
-      const RAWG_KEY = 'a270cb5741884441adca87b8298d3c1b'; 
-      const resRawg = await axios.get(
-        `https://api.rawg.io/api/games?key=${RAWG_KEY}&search=${localData.titulo}`
-      );
-
-      let extraData = { sobre: "Descrição não encontrada." };
-      
-      if (resRawg.data.results.length > 0) {
-        const gameSlug = resRawg.data.results[0].slug;
-        const resDesc = await axios.get(
-          `https://api.rawg.io/api/games/${gameSlug}?key=${RAWG_KEY}`
-        );
-        
-        const textoOriginal = resDesc.data.description_raw;
-
-        try {
-          const resTranslate = await axios.get(
-            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(textoOriginal.substring(0, 500))}&langpair=en|pt-BR`
-          );
-          extraData.sobre = resTranslate.data.responseData.translatedText;
-        } catch (err) {
-
-          extraData.sobre = textoOriginal;
-        }
-
-        extraData.background = resDesc.data.background_image_additional || resDesc.data.background_image;
-      }
-
-      setGame({ ...localData, ...extraData });
-    } catch (error) {
-      console.error("Erro:", error);
-    } finally {
-      setLoading(false);
+      const res = await axios.get(`http://localhost:3001/games/${id}/reviews`);
+      setReviews(res.data);
+    } catch (err) {
+      console.error("Erro ao buscar reviews:", err);
     }
   };
 
-  fetchAllData();
-}, [id]);
+  useEffect(() => {
+    const fetchAllData = async () => {
+      try {
+        setLoading(true);
+        
+        const resLocal = await axios.get(`http://localhost:3001/games/${id}`);
+        const localData = resLocal.data;
+        const RAWG_KEY = 'a270cb5741884441adca87b8298d3c1b'; 
+        const resRawg = await axios.get(
+          `https://api.rawg.io/api/games?key=${RAWG_KEY}&search=${localData.titulo}`
+        );
+
+        let extraData = { sobre: "Descrição não encontrada." };
+        
+        if (resRawg.data.results.length > 0) {
+          const gameSlug = resRawg.data.results[0].slug;
+          const resDesc = await axios.get(
+            `https://api.rawg.io/api/games/${gameSlug}?key=${RAWG_KEY}`
+          );
+          
+          const textoOriginal = resDesc.data.description_raw;
+
+          try {
+            const resTranslate = await axios.get(
+              `https://api.mymemory.translated.net/get?q=${encodeURIComponent(textoOriginal.substring(0, 500))}&langpair=en|pt-BR`
+            );
+            extraData.sobre = resTranslate.data.responseData.translatedText;
+          } catch (err) {
+            extraData.sobre = textoOriginal;
+          }
+
+          extraData.background = resDesc.data.background_image_additional || resDesc.data.background_image;
+        }
+
+        setGame({ ...localData, ...extraData });
+        await fetchReviews();
+      } catch (error) {
+        console.error("Erro:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllData();
+  }, [id]);
+
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+    setReviewError('');
+
+    if (!newReview.trim()) return;
+
+    if (!username) {
+      setReviewError('Você precisa estar logado para deixar uma review.');
+      return;
+    }
+
+    try {
+      await axios.post(`http://localhost:3001/games/${id}/reviews`, {
+        texto: newReview,
+        username: username // Passando o username para o backend achar o user_id correspondente
+      });
+
+      setNewReview('');
+      fetchReviews(); // Atualiza a lista na tela
+    } catch (err) {
+      setReviewError('Erro ao publicar review. Tente novamente.');
+      console.error(err);
+    }
+  };
 
   if (loading) return <div className="loading-screen">Carregando Detalhes...</div>;
   if (!game) return <div className="error-screen">Jogo não encontrado.</div>;
@@ -95,11 +132,14 @@ useEffect(() => {
             </div>
             <div className="stat-card">
               <span className="label">Conquista</span>
-              <span className="value"><img 
-                    src="https://cdn-icons-png.flaticon.com/512/3112/3112946.png" 
-                    alt="trofeu" 
-                    style={{ width: '20px', height: '18px', filter: 'brightness(0) invert(1)', marginRight: '2px' }} 
-                  /> {game.trofeus} Troféus</span>
+              <span className="value">
+                <img 
+                  src="https://cdn-icons-png.flaticon.com/512/3112/3112946.png" 
+                  alt="trofeu" 
+                  style={{ width: '20px', height: '18px', filter: 'brightness(0) invert(1)', marginRight: '2px' }} 
+                /> 
+                {game.trofeus} Troféus
+              </span>
             </div>
             <div className="stat-card">
               <span className="label">Gênero</span>
@@ -107,6 +147,44 @@ useEffect(() => {
             </div>
           </aside>
         </main>
+
+        <section className="reviews-section">
+          <h2>Reviews da Comunidade</h2>
+
+          {username ? (
+            <form onSubmit={handleReviewSubmit} className="review-form">
+              <textarea
+                placeholder="Escreva sua review sobre o jogo..."
+                value={newReview}
+                onChange={(e) => setNewReview(e.target.value)}
+                maxLength={1000}
+                required
+              />
+              {reviewError && <p className="review-error-msg">{reviewError}</p>}
+              <button type="submit" className="submit-review-btn">Publicar Review</button>
+            </form>
+          ) : (
+            <p className="login-warning-box">Faça login para deixar sua review nesta save point.</p>
+          )}
+
+          <div className="reviews-list">
+            {reviews.length === 0 ? (
+              <p className="no-reviews">Seja o primeiro a deixar uma review para este jogo!</p>
+            ) : (
+              reviews.map((review) => (
+                <div key={review.id} className="review-card">
+                  <div className="review-card-header">
+                    <span className="review-author">@{review.username}</span>
+                    <span className="review-date">
+                      {new Date(review.data_coment).toLocaleDateString('pt-BR')}
+                    </span>
+                  </div>
+                  <p className="review-text">{review.texto}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );

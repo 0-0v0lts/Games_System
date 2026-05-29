@@ -1,78 +1,125 @@
 .main-header {
+  background-color: var(--card-bg-color);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background-color: #151515;
-  color: white;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 0 40px;
+  height: 80px;
+  position: relative;
+  z-index: 10;
 }
 
-.logo {
+.main-header, 
+.main-header button, 
+.main-header a, 
+.main-header span {
+  font-family: var(--font-family), sans-serif;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
   text-decoration: none;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: 2px;
 }
 
-.logo span {
-  background-color: white;
-  color: black;
-  padding: 0 5px;
+.header-logo-icon {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.logo-text span {
+  background-color: var(--accent-neon);
+  color: #050507;
+  padding: 2px 6px;
   border-radius: 4px;
   margin-left: 5px;
+  font-weight: 900;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
 }
 
-.add-button {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  font-size: 13px;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 10px 20px;
+.add-button, 
+.news-button, 
+.btn-logout {
+  background: transparent;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color);
+  padding: 0 20px;
+  height: 38px;
   border-radius: 6px;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.add-button:hover {
-  background-color: #00ff7f;
-  color: #000;
-  box-shadow: 0 0 20px rgba(0, 255, 127, 0.4);
-  transform: translateY(-2px);
+.add-button:hover, 
+.news-button:hover, 
+.btn-logout:hover {
+  color: var(--accent-neon) !important;
+  border-color: var(--accent-neon);
+  background-color: rgba(57, 255, 20, 0.05);
 }
 
 .user-profile {
   display: flex;
   align-items: center;
   gap: 12px;
+  height: 38px;
 }
 
 .avatar {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
+  background-color: var(--accent-neon);
+  color: #050507;
   border-radius: 50%;
-  background-color: #27ae60;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-weight: bold;
+  justify-content: center;
+  font-weight: 700;
   font-size: 14px;
-  box-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
 }
 
 .user-name {
+  color: var(--text-primary);
+  font-weight: 600;
   font-size: 14px;
-  font-weight: 500;
-  color: #eee;
+  display: flex;
+  align-items: center;
+}
+
+.role-badge {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
 }
