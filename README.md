@@ -1,4 +1,4 @@
-# **Biblioteca de Jogos - Lucas Ferraz dos Santos**
+# **Biblioteca de Jogos**
 
 Este projeto é um sistema de gerenciamento de jogos (CRUD) desenvolvido para a disciplina de Experiência Criativa.
 
@@ -7,8 +7,11 @@ Este projeto é um sistema de gerenciamento de jogos (CRUD) desenvolvido para a 
 O objetivo deste projeto é desenvolver uma aplicação web para o gerenciamento eficiente de uma coleção de jogos, permitindo ao usuário realizar operações completas de criação, leitura, atualização e exclusão (CRUD) de dados. O sistema visa organizar informações como título, gênero, plataforma, preço e conquistas, garantindo a integridade dos dados através de validações no backend e proporcionando uma interface intuitiva com suporte a paginação para otimização da visualização.
 
 ## **Aluno**
+- **Nome:** Antonio Bernardo Zilio Tomasi
+- **Nome:** Alan Filipe Reginato de França Santos
+- **Nome:** Gustavo Lona Grespan
 - **Nome:** Lucas Ferraz dos Santos
-- **RA:** 40090790
+- **Nome:** Pedro Henrique Morae
 
 ## **Tecnologias**
 - **Front-end:** React + CSS3
